@@ -1,0 +1,91 @@
+local virtualUser = game:GetService('VirtualUser')
+local players = game:GetService('Players')
+local player = players.LocalPlayer
+local CoreGui = game:GetService("StarterGui")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Cat clicker🐾", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionConfigs"})
+
+local Tab = Window:MakeTab({
+	Name = "Autofarm",
+	Icon = "rbxassetid://122341342375300",
+	PremiumOnly = false
+})
+
+
+local Section = Tab:AddSection({
+	Name = "Vulnerabilities ||| https://github.com/nikoladhima"
+})
+
+_G.giveFish = false
+_G.AutoClick = false
+_G.AutoRebirth = false
+_G.AutoUpgrade = false
+
+Tab:AddParagraph("IMPORTANT NOTE","Do not combine Auto Upgrade with Auto Rebirth and giving yourself too much fish will break the fish upgrades")
+
+Tab:AddTextbox({
+	Name = "Give fish ",
+	Default = "",
+    --Numeric = true,
+    --Finsihed = true,
+	TextDisappear = true,
+	Callback = function(Value)
+        _G.giveFish = true
+		game:GetService("ReplicatedStorage").Fish:FireServer(Value)
+	end	  
+})
+
+Tab:AddToggle({
+    Name = "Autoclicker",
+	Default = false,
+    Callback = function(state)
+        _G.AutoClick = state
+
+        while _G.AutoClick do
+            ReplicatedStorage:WaitForChild("Click"):FindFirstChild("Click"):FireServer()
+            task.wait()
+        end
+    end
+})
+
+Tab:AddToggle({
+    --Name = "Auto Rebirth (Dont use with Auto Upgrade),
+    Name = "Auto Rebirth",
+    
+    Default = false,
+    Callback = function(state)
+        _G.AutoRebirth = state
+
+        while _G.AutoRebirth do
+            ReplicatedStorage:WaitForChild("Rebirth"):FireServer()
+            task.wait()
+        end
+    end
+})
+
+Tab:AddToggle({
+    Name = "Auto Upgrade",
+    Default = false,
+    Callback = function(state)
+        _G.AutoUpgrade = state
+        while _G.AutoUpgrade do
+            ReplicatedStorage:WaitForChild("MultiShop")['x100']:FireServer()
+            for _, event in ipairs(ReplicatedStorage.Shop:GetChildren()) do
+                event:FireServer()
+                task.wait()
+            end
+        end
+    end
+})
+
+game:GetService('Players').LocalPlayer.Idled:Connect(function()
+        virtualUser:CaptureController()
+        virtualUser:ClickButton2(Vector2.new())
+        print('Anti-AFK triggered')
+     end)
+     print("Loaded Built-in Anti-AFK")
+
+OrionLib:Init()
