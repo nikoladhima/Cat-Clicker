@@ -1,4 +1,4 @@
-## Script Thumbnail
+## Cat Clicker🐾
 <img src="Assets/catclickerthumbnail.jpg" alt="Cat Clicker🐾">
 
 ## ⚡ Features
