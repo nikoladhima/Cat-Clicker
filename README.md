@@ -7,6 +7,7 @@
 - Autoclicker (Taps as fast as possible)
 - Auto Rebirth
 - Auto Upgrade
+- Built-In Anti-AFK
 
  ## 🔌Shortened Script
  ```lua
