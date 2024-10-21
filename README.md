@@ -1,5 +1,5 @@
 ## Script Thumbnail
-<img src="Assets/Screenshot_15.png" alt="ND Script Hub">
+<img src="Assets/catclickerthumbnail.jpg" alt="Cat Clicker🐾">
 
 ## ⚡ Features
 
