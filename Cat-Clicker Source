@@ -1,6 +1,3 @@
-local virtualUser = game:GetService('VirtualUser')
-local players = game:GetService('Players')
-local player = players.LocalPlayer
 local CoreGui = game:GetService("StarterGui")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
@@ -81,11 +78,53 @@ Tab:AddToggle({
     end
 })
 
-game:GetService('Players').LocalPlayer.Idled:Connect(function()
-        virtualUser:CaptureController()
-        virtualUser:ClickButton2(Vector2.new())
-        print('Anti-AFK triggered')
-     end)
-     print("Loaded Built-in Anti-AFK")
+Tab:AddButton({
+    Name = "Anti-AFK",
+    Default = false,
+    Callback = function()
+        local virtualUser = game:GetService('VirtualUser')
+        local players = game:GetService('Players')
+        local player = players.LocalPlayer
+        game:GetService('Players').LocalPlayer.Idled:Connect(function()
+            virtualUser:CaptureController()
+            virtualUser:ClickButton2(Vector2.new())
+            print('Anti-AFK triggered')
+         end)
+         print("Loaded Built-in Anti-AFK")
+    end
+})
 
 OrionLib:Init()
+--[[
+Name = <string> - The name of the textbox.
+Default = <string> - The default value of the textbox.
+TextDisappear = <bool> - Makes the text disappear in the textbox after losing focus.
+Callback = <function> - The function of the textbox.
+]]
+
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
+
+--[[
+Name = <string> - The name of the section.
+]]
+
+--[[
+Name = <string> - The name of the UI.
+HidePremium = <bool> - Whether or not the user details shows Premium status or not.
+SaveConfig = <bool> - Toggles the config saving in the UI.
+ConfigFolder = <string> - The name of the folder where the configs are saved.
+IntroEnabled = <bool> - Whether or not to show the intro animation.
+IntroText = <string> - Text to show in the intro animation.
+IntroIcon = <string> - URL to the image you want to use in the intro animation.
+Icon = <string> - URL to the image you want displayed on the window.
+CloseCallback = <function> - Function to execute when the window is closed.
+]]
